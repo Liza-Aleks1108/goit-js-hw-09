@@ -13,8 +13,8 @@ populateForm();
 let formData = {};
 function onFormInput(event) {
   formData = {
-    email: email.value,
-    message: textarea.value,
+    email: email.value.trim(),
+    message: textarea.value.trim(),
   };
 
   localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
@@ -38,8 +38,13 @@ function onSubmit(event) {
   event.preventDefault();
 
   if (email.value.trim() !== '' && textarea.value.trim() !== '') {
-    console.log(localStorage.getItem(STORAGE_KEY));
-    localStorage.clear();
+    const submittedData = {
+      email: email.value.trim(),
+      message: textarea.value.trim(),
+    };
+    console.log(submittedData);
+
+    localStorage.removeItem(STORAGE_KEY);
     email.value = '';
     textarea.value = '';
   } else {
