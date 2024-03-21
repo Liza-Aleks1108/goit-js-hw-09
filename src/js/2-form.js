@@ -6,7 +6,7 @@ const email = formEl.querySelector('input[type="email"]');
 const btnEl = formEl.querySelector('button');
 
 formEl.addEventListener('input', onFormInput);
-btnEl.addEventListener('click', onSubmit);
+formEl.addEventListener('submit', onSubmit);
 
 populateForm();
 
@@ -35,12 +35,14 @@ function populateForm() {
 }
 
 function onSubmit(event) {
-  if (event.target === btnEl) {
-    event.preventDefault();
+  event.preventDefault();
 
+  if (email.value.trim() !== '' && textarea.value.trim() !== '') {
     console.log(localStorage.getItem(STORAGE_KEY));
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.clear();
     email.value = '';
     textarea.value = '';
+  } else {
+    console.log('Обидва елементи форми мають бути заповнені');
   }
 }
